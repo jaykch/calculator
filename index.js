@@ -4,21 +4,31 @@
 $(document).ready(function(){
     console.log("testing");
     calculator.render(placeholder);
-    calculator.input();
-    calculator.clear();
-    calculator.add();
-    calculator.subtract();
-    calculator.multiply();
-    calculator.divide();
+    calculator.init();
 });
+
+function log(){
+    console.log(arguments);
+}
 
 var placeholder = "";
 
 
 var calculator = (function () {
 
+    var prevVal = 0;
+    var action = "";
 
-    function input(){
+    function init(){
+        _clear();
+        _add();
+        _subtract();
+        _multiply();
+        _divide();
+        _input();
+    }
+
+    function _input(){
         for (var i = 0; i < 10; i++) {
             $('[data-id=' + i +']').click(function(){
                 placeholder += $(this).attr("data-id");
@@ -27,15 +37,17 @@ var calculator = (function () {
         }
     }
 
-    function add() {
+    function _add() {
         $('[data-id="add"]').click(function(){
+            prevVal = parseInt(placeholder);
+            log(prevVal, placeholder);
             placeholder = "+";
             render(placeholder);
             placeholder = "";
         });
     }
 
-    function subtract() {
+    function _subtract() {
         $('[data-id="sub"]').click(function(){
             placeholder = "-";
             render(placeholder);
@@ -43,7 +55,7 @@ var calculator = (function () {
         });
     }
 
-    function multiply() {
+    function _multiply() {
         $('[data-id="mult"]').click(function(){
             placeholder = "x";
             render(placeholder);
@@ -51,7 +63,7 @@ var calculator = (function () {
         });
     }
 
-    function divide() {
+    function _divide() {
         $('[data-id="div"]').click(function(){
             placeholder = "&divide;";
             render(placeholder);
@@ -59,7 +71,7 @@ var calculator = (function () {
         });
     }
 
-    function clear() {
+    function _clear() {
         $('[data-id="clear"]').click(function(){
             placeholder = "";
             render(placeholder);
@@ -76,14 +88,9 @@ var calculator = (function () {
     }
 
     return {
-        add: add,
-        subtract: subtract,
-        multiply: multiply,
-        divide: divide,
-        clear: clear,
+        init: init,
         response: response,
-        render: render,
-        input:input
+        render: render
     }
 
 })();
