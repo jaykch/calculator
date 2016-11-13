@@ -48,6 +48,7 @@ var calculator = (function () {
             render(placeholder);
             placeholder = "";
             log(placeholder);
+            _calculate();
         });
     }
 
@@ -57,6 +58,7 @@ var calculator = (function () {
             placeholder = "-";
             render(placeholder);
             placeholder = "";
+            _calculate();
         });
     }
 
@@ -66,6 +68,7 @@ var calculator = (function () {
             placeholder = "x";
             render(placeholder);
             placeholder = "";
+            _calculate();
         });
     }
 
@@ -75,6 +78,7 @@ var calculator = (function () {
             placeholder = "&divide;";
             render(placeholder);
             placeholder = "";
+            _calculate();
         });
     }
 
@@ -130,7 +134,8 @@ var calculator = (function () {
         $('[data-id="res"]').click(function () {
             _adjustValues();
             _calculate();
-            render(result);
+            render("Answer: " + result + " Please Clear");
+            _reset();
         });
     }
 
