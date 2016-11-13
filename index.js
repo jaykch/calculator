@@ -2,9 +2,11 @@
  * Created by Jay on 11/13/2016.
  */
 $(document).ready(function () {
-    calculator.render(placeholder);
     calculator.init();
+    calculator.render(placeholder);
 });
+
+//todo: calculate every time an action is triggered
 
 function log() {
     console.log(arguments);
