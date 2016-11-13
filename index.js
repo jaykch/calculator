@@ -1,13 +1,12 @@
 /**
  * Created by Jay on 11/13/2016.
  */
-$(document).ready(function(){
-    console.log("testing");
+$(document).ready(function () {
     calculator.render(placeholder);
     calculator.init();
 });
 
-function log(){
+function log() {
     console.log(arguments);
 }
 
@@ -17,70 +16,122 @@ var placeholder = "";
 var calculator = (function () {
 
     var prevVal = 0;
-    var action = "";
+    var curVal = 0;
+    var actionType = "";
+    var result = 0;
 
-    function init(){
+    function init() {
         _clear();
-        _add();
-        _subtract();
-        _multiply();
-        _divide();
+        _addHandler();
+        _subtractHandler();
+        _multiplyHandler();
+        _divideHandler();
         _input();
+        _response();
     }
 
-    function _input(){
+    function _input() {
         for (var i = 0; i < 10; i++) {
-            $('[data-id=' + i +']').click(function(){
+            $('[data-id=' + i + ']').click(function () {
                 placeholder += $(this).attr("data-id");
                 render(placeholder);
             });
         }
     }
 
-    function _add() {
-        $('[data-id="add"]').click(function(){
-            prevVal = parseInt(placeholder);
-            log(prevVal, placeholder);
+    function _addHandler() {
+        $('[data-id="add"]').click(function () {
+            _setAction($(this));
             placeholder = "+";
             render(placeholder);
             placeholder = "";
+            log(placeholder);
         });
     }
 
-    function _subtract() {
-        $('[data-id="sub"]').click(function(){
+    function _subtractHandler() {
+        $('[data-id="sub"]').click(function () {
+            _setAction($(this));
             placeholder = "-";
             render(placeholder);
             placeholder = "";
         });
     }
 
-    function _multiply() {
-        $('[data-id="mult"]').click(function(){
+    function _multiplyHandler() {
+        $('[data-id="mult"]').click(function () {
+            _setAction($(this));
             placeholder = "x";
             render(placeholder);
             placeholder = "";
         });
     }
 
-    function _divide() {
-        $('[data-id="div"]').click(function(){
+    function _divideHandler() {
+        $('[data-id="div"]').click(function () {
+            _setAction($(this));
             placeholder = "&divide;";
             render(placeholder);
             placeholder = "";
         });
     }
 
+    function _reset(){
+        placeholder = "";
+        prevVal = 0;
+        curVal = 0;
+        actionType = "";
+        result = 0;
+    }
+
     function _clear() {
-        $('[data-id="clear"]').click(function(){
-            placeholder = "";
+        $('[data-id="clear"]').click(function () {
+            _reset()
             render(placeholder);
         });
     }
 
-    function response() {
-
+    function _setAction(scope) {
+        _adjustValues();
+        actionType = scope.attr("data-id");
     }
+
+    function _adjustValues(){
+        prevVal = curVal;
+        curVal = parseInt(placeholder);
+    }
+
+    function _calculate() {
+        if (actionType) {
+            switch (actionType) {
+                case "add":
+                    result = prevVal + curVal;
+                    curVal = result;
+                    break;
+                case "sub":
+                    result = prevVal - curVal;
+                    curVal = result;
+                    break;
+                case "mult":
+                    result = prevVal * curVal;
+                    curVal = result;
+                    break;
+                case "div":
+                    result = prevVal / curVal;
+                    curVal = result;
+                    break;
+            }
+        }
+    }
+
+    function _response() {
+        $('[data-id="res"]').click(function () {
+            _adjustValues();
+            _calculate();
+            render(result);
+        });
+    }
+
     function render(x) {
         $("#screen").html("<span>"
             + x
@@ -89,7 +140,6 @@ var calculator = (function () {
 
     return {
         init: init,
-        response: response,
         render: render
     }
 
