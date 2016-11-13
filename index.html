@@ -13,15 +13,28 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
-        .app{
+        .app {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             width: 100vw;
+            background: #514646;
         }
-        button.digit{
+
+        button.digit {
             margin: 5px;
+        }
+
+        #screen {
+            margin: 10px 20px;
+            height: 50px;
+            background: rgba(16, 44, 48, 0.74);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            color: white;
         }
 
     </style>
@@ -29,27 +42,38 @@
 <body>
 <div class="app">
     <div class="container">
-        <div class="col-md-6 text-center col-md-offset-3 well">
+        <div class="col-md-6 text-center col-md-offset-4 ">
             <div id="calculator">
                 <div class="digits">
                     <div class="row">
-                        <div id="screen" class="col-md-12"></div>
-                        <span>Pseudo Text</span>
+                        <div id="screen" class="col-md-8">
+                            <span>Pseudo Text</span>
+                        </div>
+
                     </div>
                     <div class="row">
-                        <button class="digit col-md-2 btn-lg  btn btn-warning">1</button>
-                        <button class="digit col-md-2 btn-lg  btn btn-warning">1</button>
-                        <button class="digit col-md-2 btn-lg  btn btn-warning">1</button>
+                        <button class="digit col-md-2 btn-lg  btn" data-id="1">1</button>
+                        <button class="digit col-md-2 btn-lg  btn" data-id="2">2</button>
+                        <button class="digit col-md-2 btn-lg  btn" data-id="3">3</button>
+                        <button class="digit col-md-2 btn-lg  btn" data-id="div">÷</button>
                     </div>
                     <div class="row">
-                        <button class="digit col-md-2 btn-lg  btn btn-warning">1</button>
-                        <button class="digit col-md-2 btn-lg  btn btn-warning">1</button>
-                        <button class="digit col-md-2 btn-lg  btn btn-warning">1</button>
+                        <button class="digit col-md-2 btn-lg  btn" data-id="4">4</button>
+                        <button class="digit col-md-2 btn-lg  btn" data-id="5">5</button>
+                        <button class="digit col-md-2 btn-lg  btn" data-id="6">6</button>
+                        <button class="digit col-md-2 btn-lg  btn" data-id="mult">x</button>
                     </div>
                     <div class="row">
-                        <button class="digit col-md-2 btn-lg  btn btn-warning">1</button>
-                        <button class="digit col-md-2 btn-lg  btn btn-warning">1</button>
-                        <button class="digit col-md-2 btn-lg  btn btn-warning">1</button>
+                        <button class="digit col-md-2 btn-lg  btn" data-id="7">7</button>
+                        <button class="digit col-md-2 btn-lg  btn" data-id="8">8</button>
+                        <button class="digit col-md-2 btn-lg  btn" data-id="9">9</button>
+                        <button class="digit col-md-2 btn-lg  btn" data-id="sub">-</button>
+                    </div>
+                    <div class="row">
+                        <button class="digit col-md-2 btn-lg  btn" data-id="clear">C</button>
+                        <button class="digit col-md-2 btn-lg  btn" data-id="0">0</button>
+                        <button class="digit col-md-2 btn-lg  btn" data-id="res">=</button>
+                        <button class="digit col-md-2 btn-lg  btn" data-id="add">+</button>
                     </div>
                 </div>
             </div>
