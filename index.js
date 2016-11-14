@@ -43,14 +43,15 @@ var calculator = (function () {
         }
     }
 
-    function _initialAction(scope){
-        if (actionType === ""){
+    function _initialAction(scope) {
+        if (actionType === "") {
             _setAction(scope);
         }
     }
 
     function _addHandler() {
         $('[data-id="add"]').click(function () {
+            render("+");
             _initialAction($(this));
             _calculate();
             _setAction($(this));
@@ -60,6 +61,7 @@ var calculator = (function () {
 
     function _subtractHandler() {
         $('[data-id="sub"]').click(function () {
+            render("-");
             _initialAction($(this));
             _calculate();
             _setAction($(this));
@@ -69,6 +71,7 @@ var calculator = (function () {
 
     function _multiplyHandler() {
         $('[data-id="mult"]').click(function () {
+            render("x");
             _initialAction($(this));
             _calculate();
             _setAction($(this));
@@ -78,6 +81,7 @@ var calculator = (function () {
 
     function _divideHandler() {
         $('[data-id="div"]').click(function () {
+            render("&divide;");
             _initialAction($(this));
             _calculate();
             _setAction($(this));
@@ -118,29 +122,29 @@ var calculator = (function () {
                     _adjustValues();
                     break;
                 case "sub":
-                    if(prevVal === 0){
+                    if (prevVal === 0) {
                         prevVal = curVal;
-                    }else{
+                    } else {
                         result = prevVal - curVal;
                         prevVal = result;
                     }
                     _adjustValues();
                     break;
                 case "mult":
-                    if(prevVal === 0 || curVal === 0){
-                        prevVal = curVal;
-                    }else{
+                    if (prevVal !== 0) {
                         result = prevVal * curVal;
                         prevVal = result;
+                    } else {
+                        prevVal = curVal;
                     }
                     _adjustValues();
                     break;
                 case "div":
-                    if(prevVal === 0 || curVal === 0){
-                        prevVal = curVal;
-                    }else{
+                    if (prevVal !== 0) {
                         result = prevVal / curVal;
                         prevVal = result;
+                    } else {
+                        prevVal = curVal;
                     }
                     _adjustValues();
                     break;
@@ -153,7 +157,7 @@ var calculator = (function () {
             _calculate();
             curVal = 0;
             placeholder = 0;
-            render(result);
+            render("Answer: " + result);
             log(prevVal, curVal, "result: " + result);
         });
     }
