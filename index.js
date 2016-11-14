@@ -6,8 +6,6 @@ $(document).ready(function () {
     calculator.render(placeholder);
 });
 
-//todo: calculate every time an action is triggered
-
 function log() {
     console.log(arguments);
 }
