@@ -12,7 +12,7 @@ function log() {
     console.log(arguments);
 }
 
-var placeholder = "";
+var placeholder = 0;
 
 
 var calculator = (function () {
@@ -35,55 +35,58 @@ var calculator = (function () {
     function _input() {
         for (var i = 0; i < 10; i++) {
             $('[data-id=' + i + ']').click(function () {
-                placeholder += $(this).attr("data-id");
+                placeholder = placeholder * 10 + parseInt($(this).attr("data-id"));
+                curVal = placeholder;
+                log(prevVal, curVal, "result: " + result);
                 render(placeholder);
             });
         }
     }
 
+    function _initialAction(scope){
+        if (actionType === ""){
+            _setAction(scope);
+        }
+    }
+
     function _addHandler() {
         $('[data-id="add"]').click(function () {
-            _setAction($(this));
-            placeholder = "+";
-            render(placeholder);
-            placeholder = "";
-            log(placeholder);
+            _initialAction($(this));
             _calculate();
+            _setAction($(this));
+            log(prevVal, curVal, "result: " + result);
         });
     }
 
     function _subtractHandler() {
         $('[data-id="sub"]').click(function () {
-            _setAction($(this));
-            placeholder = "-";
-            render(placeholder);
-            placeholder = "";
+            _initialAction($(this));
             _calculate();
+            _setAction($(this));
+            log(prevVal, curVal, "result: " + result);
         });
     }
 
     function _multiplyHandler() {
         $('[data-id="mult"]').click(function () {
-            _setAction($(this));
-            placeholder = "x";
-            render(placeholder);
-            placeholder = "";
+            _initialAction($(this));
             _calculate();
+            _setAction($(this));
+            log(prevVal, curVal, "result: " + result);
         });
     }
 
     function _divideHandler() {
         $('[data-id="div"]').click(function () {
-            _setAction($(this));
-            placeholder = "&divide;";
-            render(placeholder);
-            placeholder = "";
+            _initialAction($(this));
             _calculate();
+            _setAction($(this));
+            log(prevVal, curVal, "result: " + result);
         });
     }
 
-    function _reset(){
-        placeholder = "";
+    function _reset() {
+        placeholder = 0;
         prevVal = 0;
         curVal = 0;
         actionType = "";
@@ -92,19 +95,18 @@ var calculator = (function () {
 
     function _clear() {
         $('[data-id="clear"]').click(function () {
-            _reset()
+            _reset();
             render(placeholder);
         });
     }
 
     function _setAction(scope) {
-        _adjustValues();
         actionType = scope.attr("data-id");
     }
 
-    function _adjustValues(){
-        prevVal = curVal;
-        curVal = parseInt(placeholder);
+    function _adjustValues() {
+        placeholder = 0;
+        curVal = 0;
     }
 
     function _calculate() {
@@ -112,19 +114,35 @@ var calculator = (function () {
             switch (actionType) {
                 case "add":
                     result = prevVal + curVal;
-                    curVal = result;
+                    prevVal = result;
+                    _adjustValues();
                     break;
                 case "sub":
-                    result = prevVal - curVal;
-                    curVal = result;
+                    if(prevVal === 0){
+                        prevVal = curVal;
+                    }else{
+                        result = prevVal - curVal;
+                        prevVal = result;
+                    }
+                    _adjustValues();
                     break;
                 case "mult":
-                    result = prevVal * curVal;
-                    curVal = result;
+                    if(prevVal === 0 || curVal === 0){
+                        prevVal = curVal;
+                    }else{
+                        result = prevVal * curVal;
+                        prevVal = result;
+                    }
+                    _adjustValues();
                     break;
                 case "div":
-                    result = prevVal / curVal;
-                    curVal = result;
+                    if(prevVal === 0 || curVal === 0){
+                        prevVal = curVal;
+                    }else{
+                        result = prevVal / curVal;
+                        prevVal = result;
+                    }
+                    _adjustValues();
                     break;
             }
         }
@@ -132,10 +150,11 @@ var calculator = (function () {
 
     function _response() {
         $('[data-id="res"]').click(function () {
-            _adjustValues();
             _calculate();
-            render("Answer: " + result + " Please Clear");
-            _reset();
+            curVal = 0;
+            placeholder = 0;
+            render(result);
+            log(prevVal, curVal, "result: " + result);
         });
     }
 
