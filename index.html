@@ -15,11 +15,12 @@
     <style>
         .app {
             display: flex;
+            flex-flow: column nowrap;
             justify-content: center;
             align-items: center;
             height: 100vh;
             width: 100vw;
-            background: #514646;
+            background: rgb(138, 139, 166);
         }
 
         button.digit {
@@ -29,7 +30,7 @@
         #screen {
             margin: 10px 20px;
             height: 50px;
-            background: rgba(16, 44, 48, 0.74);
+            background: rgba(28, 78, 85, 0.74);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -37,46 +38,71 @@
             color: white;
         }
 
+        a {
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+
+        a, a:focus, a:visited {
+            color: #0e0b49;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: rgba(14, 11, 73, 0.59);
+            text-decoration: none;
+        }
+
+
     </style>
 </head>
 <body>
 <div class="app">
     <div class="container">
-        <div class="col-md-6 text-center col-md-offset-4 ">
-            <div id="calculator">
-                <div class="digits">
-                    <div class="row">
-                        <div id="screen" class="col-md-8">
-                            <span>Pseudo Text</span>
-                        </div>
+        <div class="row">
+            <div class="col-md-6 text-center col-md-offset-4 ">
+                <div id="calculator">
+                    <div class="digits">
+                        <div class="row">
+                            <div id="screen" class="col-md-8">
+                                <span>Pseudo Text</span>
+                            </div>
 
-                    </div>
-                    <div class="row">
-                        <button class="digit col-md-2 btn-lg  btn" data-id="1">1</button>
-                        <button class="digit col-md-2 btn-lg  btn" data-id="2">2</button>
-                        <button class="digit col-md-2 btn-lg  btn" data-id="3">3</button>
-                        <button class="digit col-md-2 btn-lg  btn" data-id="div">&divide;</button>
-                    </div>
-                    <div class="row">
-                        <button class="digit col-md-2 btn-lg  btn" data-id="4">4</button>
-                        <button class="digit col-md-2 btn-lg  btn" data-id="5">5</button>
-                        <button class="digit col-md-2 btn-lg  btn" data-id="6">6</button>
-                        <button class="digit col-md-2 btn-lg  btn" data-id="mult">x</button>
-                    </div>
-                    <div class="row">
-                        <button class="digit col-md-2 btn-lg  btn" data-id="7">7</button>
-                        <button class="digit col-md-2 btn-lg  btn" data-id="8">8</button>
-                        <button class="digit col-md-2 btn-lg  btn" data-id="9">9</button>
-                        <button class="digit col-md-2 btn-lg  btn" data-id="sub">-</button>
-                    </div>
-                    <div class="row">
-                        <button class="digit col-md-2 btn-lg  btn" data-id="clear">AC</button>
-                        <button class="digit col-md-2 btn-lg  btn" data-id="0">0</button>
-                        <button class="digit col-md-2 btn-lg  btn" data-id="res">=</button>
-                        <button class="digit col-md-2 btn-lg  btn" data-id="add">+</button>
+                        </div>
+                        <div class="row">
+                            <button class="digit col-md-2 btn-lg  btn" data-id="1">1</button>
+                            <button class="digit col-md-2 btn-lg  btn" data-id="2">2</button>
+                            <button class="digit col-md-2 btn-lg  btn" data-id="3">3</button>
+                            <button class="digit col-md-2 btn-lg  btn" data-id="div">&divide;</button>
+                        </div>
+                        <div class="row">
+                            <button class="digit col-md-2 btn-lg  btn" data-id="4">4</button>
+                            <button class="digit col-md-2 btn-lg  btn" data-id="5">5</button>
+                            <button class="digit col-md-2 btn-lg  btn" data-id="6">6</button>
+                            <button class="digit col-md-2 btn-lg  btn" data-id="mult">x</button>
+                        </div>
+                        <div class="row">
+                            <button class="digit col-md-2 btn-lg  btn" data-id="7">7</button>
+                            <button class="digit col-md-2 btn-lg  btn" data-id="8">8</button>
+                            <button class="digit col-md-2 btn-lg  btn" data-id="9">9</button>
+                            <button class="digit col-md-2 btn-lg  btn" data-id="sub">-</button>
+                        </div>
+                        <div class="row">
+                            <button class="digit col-md-2 btn-lg  btn" data-id="clear">AC</button>
+                            <button class="digit col-md-2 btn-lg  btn" data-id="0">0</button>
+                            <button class="digit col-md-2 btn-lg  btn" data-id="res">=</button>
+                            <button class="digit col-md-2 btn-lg  btn" data-id="add">+</button>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <footer class="text-center"><a href="https://github.com/jaykch/calculator" target="_blank">GitHub Link</a>
+            </footer>
         </div>
     </div>
 </div>
