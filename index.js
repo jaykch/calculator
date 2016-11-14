@@ -117,7 +117,6 @@ var calculator = (function () {
                 case "add":
                     result = prevVal + curVal;
                     prevVal = result;
-                    _adjustValues();
                     break;
                 case "sub":
                     if (prevVal === 0) {
@@ -126,7 +125,6 @@ var calculator = (function () {
                         result = prevVal - curVal;
                         prevVal = result;
                     }
-                    _adjustValues();
                     break;
                 case "mult":
                     if (prevVal !== 0) {
@@ -135,7 +133,6 @@ var calculator = (function () {
                     } else {
                         prevVal = curVal;
                     }
-                    _adjustValues();
                     break;
                 case "div":
                     if (prevVal !== 0) {
@@ -144,10 +141,11 @@ var calculator = (function () {
                     } else {
                         prevVal = curVal;
                     }
-                    _adjustValues();
                     break;
             }
         }
+        _adjustValues();
+
     }
 
     function _response() {
@@ -157,6 +155,7 @@ var calculator = (function () {
             placeholder = 0;
             render("Answer: " + result);
             log(prevVal, curVal, "result: " + result);
+            _reset();
         });
     }
 
